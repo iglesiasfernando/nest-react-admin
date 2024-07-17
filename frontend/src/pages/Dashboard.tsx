@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query';
 
-import UpdateProfile from '../components/dashboard/UpdateProfile';
 import Layout from '../components/layout';
 import useAuth from '../hooks/useAuth';
 import statsService from '../services/StatsService';
@@ -37,8 +36,6 @@ export default function Dashboard() {
             </div>
           </div>
         ) : null}
-
-        <UpdateProfile />
       </div>
     </Layout>
   );

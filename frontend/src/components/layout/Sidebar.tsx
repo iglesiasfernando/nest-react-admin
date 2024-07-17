@@ -1,4 +1,4 @@
-import { BookOpen, Home, LogOut, Users } from 'react-feather';
+import { BookOpen, Home, LogOut, Settings, Users } from 'react-feather';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -23,9 +23,7 @@ export default function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={'sidebar custom-background-image ' + className}>
-      <Link to="/" className="no-underline">
-        <img src="/urbano-logo-white.png" alt='"Logo"' />
-      </Link>
+      <img src="/urbano-logo-white.png" alt='"Logo"' />
       <nav className="mt-5 flex flex-col gap-3 flex-grow">
         <SidebarItem to="/">
           <Home /> Dashboard
@@ -38,6 +36,9 @@ export default function Sidebar({ className }: SidebarProps) {
             <Users /> Users
           </SidebarItem>
         ) : null}
+        <SidebarItem to="/profile">
+          <Settings /> Account
+        </SidebarItem>
       </nav>
       <button
         className="text-red-500 rounded-md p-3 transition-colors flex gap-3 justify-center items-center font-semibold focus:outline-none"
