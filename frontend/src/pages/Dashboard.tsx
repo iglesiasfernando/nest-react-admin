@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <Layout>
       <div className="header-background pb-5 pt-1">
-        <h1 className="font-semibold text-3xl px-5 sm:px-10">Dashboard</h1>
+        <h1 className="font-semibold text-3xl px-5 sm:px-10 mt-3">Dashboard</h1>
       </div>
       <hr />
       <div className="mt-5 flex flex-col gap-5 px-5 sm:px-10">

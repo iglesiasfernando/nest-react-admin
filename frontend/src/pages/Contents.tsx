@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Loader, Plus, X } from 'react-feather';
+import { Loader, Plus, RefreshCw, X } from 'react-feather';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
@@ -30,23 +30,24 @@ export default function Course() {
     reset,
   } = useForm<CreateContentRequest>();
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     [`contents-${id}`, name, description],
     async () =>
       contentService.findAll(id, {
         name: name || undefined,
         description: description || undefined,
       }),
-    {
-      refetchInterval: 1000,
-    },
   );
-
+  const handleRefresh = () => {
+    // manually refetch
+    refetch();
+  };
   const saveCourse = async (createContentRequest: CreateContentRequest) => {
     try {
       await contentService.save(id, createContentRequest);
       setAddContentShow(false);
       reset();
+      //refetch();
       setError(null);
     } catch (error) {
       setError(error.response.data.message);
@@ -56,21 +57,29 @@ export default function Course() {
   return (
     <Layout>
       <div className="header-background pb-5 pt-1">
-        <h1 className="font-semibold text-3xl px-5 sm:px-10">
+        <h1 className="font-semibold text-3xl px-5 sm:px-10 mt-3">
           {!userQuery.isLoading ? `${userQuery.data.name} Contents` : ''}
         </h1>
       </div>
 
       <hr />
       <div className="px-5 sm:px-10">
-        {authenticatedUser.role !== 'user' ? (
+        <div className="flex flex-row">
+          {authenticatedUser.role !== 'user' ? (
+            <button
+              className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center"
+              onClick={() => setAddContentShow(true)}
+            >
+              <Plus /> Add Content
+            </button>
+          ) : null}
           <button
-            className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center"
-            onClick={() => setAddContentShow(true)}
+            className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center ml-5"
+            onClick={() => handleRefresh()}
           >
-            <Plus /> Add Content
+            <RefreshCw /> Refresh
           </button>
-        ) : null}
+        </div>
 
         <div className="table-filter">
           <div className="flex flex-row gap-5">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Loader, Plus, X } from 'react-feather';
+import { Loader, Plus, RefreshCw, X } from 'react-feather';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 
@@ -20,8 +20,11 @@ export default function Users() {
 
   const [addUserShow, setAddUserShow] = useState<boolean>(false);
   const [error, setError] = useState<string>();
-
-  const { data, isLoading } = useQuery(
+  const handleRefresh = () => {
+    // manually refetch
+    refetch();
+  };
+  const { data, isLoading, refetch } = useQuery(
     ['users', firstName, lastName, username, role],
     async () => {
       return (
@@ -32,9 +35,6 @@ export default function Users() {
           role: role || undefined,
         })
       ).filter((user) => user.id !== authenticatedUser.id);
-    },
-    {
-      refetchInterval: 1000,
     },
   );
 
@@ -50,6 +50,7 @@ export default function Users() {
       await userService.save(createUserRequest);
       setAddUserShow(false);
       setError(null);
+      refetch();
       reset();
     } catch (error) {
       setError(error.response.data.message);
@@ -59,16 +60,26 @@ export default function Users() {
   return (
     <Layout>
       <div className="header-background pb-5 pt-1">
-        <h1 className="font-semibold text-3xl px-5 sm:px-10">Manage Users</h1>
+        <h1 className="font-semibold text-3xl px-5 sm:px-10 mt-3">
+          Manage Users
+        </h1>
       </div>
       <hr />
       <div className="px-5 sm:px-10">
-        <button
-          className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center"
-          onClick={() => setAddUserShow(true)}
-        >
-          <Plus /> Add User
-        </button>
+        <div className="flex flex-row">
+          <button
+            className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center"
+            onClick={() => setAddUserShow(true)}
+          >
+            <Plus /> Add User
+          </button>
+          <button
+            className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center ml-5"
+            onClick={() => handleRefresh()}
+          >
+            <RefreshCw /> Refresh
+          </button>
+        </div>
 
         <div className="table-filter mt-2">
           <div className="flex flex-row gap-5">
