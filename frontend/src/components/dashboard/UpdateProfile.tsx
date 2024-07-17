@@ -91,7 +91,7 @@ export default function UpdateProfile() {
               {...register('password')}
             />
           </div>
-          <button className="btn w-full" disabled={isSubmitting}>
+          <button className="btn primary-red w-full" disabled={isSubmitting}>
             {isSubmitting ? (
               <Loader className="animate-spin mx-auto" />
             ) : (

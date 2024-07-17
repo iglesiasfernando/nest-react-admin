@@ -55,7 +55,7 @@ export default function Login() {
             {...register('password')}
           />
           <button
-            className="btn mt-3 sm:text-lg"
+            className="btn primary-red mt-3 sm:text-lg"
             type="submit"
             disabled={isSubmitting}
           >
