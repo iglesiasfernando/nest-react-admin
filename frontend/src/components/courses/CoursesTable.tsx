@@ -185,7 +185,7 @@ export default function CoursesTable({ data, isLoading }: UsersTableProps) {
             disabled={isSubmitting}
             {...register('description')}
           />
-          <button className="btn" disabled={isSubmitting}>
+          <button className="btn primary-red" disabled={isSubmitting}>
             {isSubmitting ? (
               <Loader className="animate-spin mx-auto" />
             ) : (

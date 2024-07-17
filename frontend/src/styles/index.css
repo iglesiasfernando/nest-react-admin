@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
   html,
   body,
@@ -28,7 +30,19 @@
     @apply hover:bg-blue-700 transition-all;
     @apply focus:ring disabled:opacity-50;
   }
-  .btn.danger {
+  .primary-red {
+    background-color: #c1292e;
+  }
+  .btn:hover {
+    background-color: #c1292e;
+  }
+  .header-background{
+    background-color:#e2e1e1;
+  }
+  .custom-background-image{
+    background-image: url("../assets/sidemenu-bg.jpg");
+  }
+ .btn.danger {
     @apply bg-red-500 hover:bg-red-700;
   }
   .input {
@@ -49,4 +63,5 @@
   .sidebar.show {
     @apply translate-x-0 !important;
   }
+ 
 }

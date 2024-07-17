@@ -58,56 +58,60 @@ export default function Users() {
 
   return (
     <Layout>
-      <h1 className="font-semibold text-3xl mb-5">Manage Users</h1>
-      <hr />
-      <button
-        className="btn my-5 flex gap-2 w-full sm:w-auto justify-center"
-        onClick={() => setAddUserShow(true)}
-      >
-        <Plus /> Add User
-      </button>
-
-      <div className="table-filter mt-2">
-        <div className="flex flex-row gap-5">
-          <input
-            type="text"
-            className="input w-1/2"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            className="input w-1/2"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-row gap-5">
-          <input
-            type="text"
-            className="input w-1/2"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <select
-            name=""
-            id=""
-            className="input w-1/2"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="">All</option>
-            <option value="user">User</option>
-            <option value="editor">Editor</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
+      <div className="header-background pb-5 pt-1">
+        <h1 className="font-semibold text-3xl px-5 sm:px-10">Manage Users</h1>
       </div>
+      <hr />
+      <div className="px-5 sm:px-10">
+        <button
+          className="btn primary-red my-5 flex gap-2 w-full sm:w-auto justify-center"
+          onClick={() => setAddUserShow(true)}
+        >
+          <Plus /> Add User
+        </button>
 
-      <UsersTable data={data} isLoading={isLoading} />
+        <div className="table-filter mt-2">
+          <div className="flex flex-row gap-5">
+            <input
+              type="text"
+              className="input w-1/2"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              className="input w-1/2"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-row gap-5">
+            <input
+              type="text"
+              className="input w-1/2"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <select
+              name=""
+              id=""
+              className="input w-1/2"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="user">User</option>
+              <option value="editor">Editor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+
+        <UsersTable data={data} isLoading={isLoading} />
+      </div>
 
       {/* Add User Modal */}
       <Modal show={addUserShow}>
@@ -174,7 +178,7 @@ export default function Users() {
             <option value="editor">Editor</option>
             <option value="admin">Admin</option>
           </select>
-          <button className="btn" disabled={isSubmitting}>
+          <button className="btn primary-red" disabled={isSubmitting}>
             {isSubmitting ? (
               <Loader className="animate-spin mx-auto" />
             ) : (

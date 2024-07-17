@@ -194,7 +194,7 @@ export default function ContentsTable({
               disabled={isSubmitting}
               {...register('description')}
             />
-            <button className="btn" disabled={isSubmitting}>
+            <button className="btn primary-red" disabled={isSubmitting}>
               {isSubmitting ? (
                 <Loader className="animate-spin mx-auto" />
               ) : (

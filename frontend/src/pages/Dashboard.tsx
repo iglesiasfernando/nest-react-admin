@@ -9,9 +9,11 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <h1 className="font-semibold text-3xl mb-5">Dashboard</h1>
+      <div className="header-background pb-5 pt-1">
+        <h1 className="font-semibold text-3xl px-5 sm:px-10">Dashboard</h1>
+      </div>
       <hr />
-      <div className="mt-5 flex flex-col gap-5">
+      <div className="mt-5 flex flex-col gap-5 px-5 sm:px-10">
         {!isLoading ? (
           <div className="flex flex-col sm:flex-row gap-5">
             <div className="card shadow text-white bg-blue-500 flex-1">

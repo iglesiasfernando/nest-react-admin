@@ -222,7 +222,7 @@ export default function UsersTable({ data, isLoading }: UsersTableProps) {
               {...register('isActive')}
             />
           </div>
-          <button className="btn" disabled={isSubmitting}>
+          <button className="btn primary-red" disabled={isSubmitting}>
             {isSubmitting ? (
               <Loader className="animate-spin mx-auto" />
             ) : (
