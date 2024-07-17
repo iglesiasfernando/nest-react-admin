@@ -2,11 +2,12 @@ import { useQuery } from 'react-query';
 
 import UpdateProfile from '../components/dashboard/UpdateProfile';
 import Layout from '../components/layout';
+import useAuth from '../hooks/useAuth';
 import statsService from '../services/StatsService';
 
 export default function Dashboard() {
   const { data, isLoading } = useQuery('stats', statsService.getStats);
-
+  const { authenticatedUser } = useAuth();
   return (
     <Layout>
       <div className="header-background pb-5 pt-1">
@@ -18,7 +19,7 @@ export default function Dashboard() {
           <div className="flex flex-col sm:flex-row gap-5">
             <div className="card shadow text-white bg-blue-500 flex-1">
               <h1 className="font-semibold sm:text-4xl text-center mb-3">
-                {data.numberOfUsers}
+                {authenticatedUser.role === 'admin' ? data.numberOfUsers : 'XX'}
               </h1>
               <p className="text-center sm:text-lg font-semibold">Users</p>
             </div>
