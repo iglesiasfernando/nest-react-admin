@@ -14,9 +14,14 @@ import TableItem from '../shared/TableItem';
 interface UsersTableProps {
   data: Course[];
   isLoading: boolean;
+  canEdit: boolean;
 }
 
-export default function CoursesTable({ data, isLoading }: UsersTableProps) {
+export default function CoursesTable({
+  data,
+  isLoading,
+  canEdit,
+}: UsersTableProps) {
   const { authenticatedUser } = useAuth();
   const [deleteShow, setDeleteShow] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -70,34 +75,35 @@ export default function CoursesTable({ data, isLoading }: UsersTableProps) {
                   <TableItem>
                     {new Date(dateCreated).toLocaleDateString()}
                   </TableItem>
-                  <TableItem className="text-right">
-                    {['admin', 'editor'].includes(authenticatedUser.role) ? (
-                      <button
-                        className="text-indigo-600 hover:text-indigo-900 focus:outline-none"
-                        onClick={() => {
-                          setSelectedCourseId(id);
+                  {canEdit && (
+                    <TableItem className="text-right">
+                      {['admin', 'editor'].includes(authenticatedUser.role) ? (
+                        <button
+                          className="text-indigo-600 hover:text-indigo-900 focus:outline-none"
+                          onClick={() => {
+                            setSelectedCourseId(id);
 
-                          setValue('name', name);
-                          setValue('description', description);
-
-                          setUpdateShow(true);
-                        }}
-                      >
-                        Edit
-                      </button>
-                    ) : null}
-                    {authenticatedUser.role === 'admin' ? (
-                      <button
-                        className="text-red-600 hover:text-red-900 ml-3 focus:outline-none"
-                        onClick={() => {
-                          setSelectedCourseId(id);
-                          setDeleteShow(true);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    ) : null}
-                  </TableItem>
+                            setValue('name', name);
+                            setValue('description', description);
+                            setUpdateShow(true);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      ) : null}
+                      {authenticatedUser.role === 'admin' ? (
+                        <button
+                          className="text-red-600 hover:text-red-900 ml-3 focus:outline-none"
+                          onClick={() => {
+                            setSelectedCourseId(id);
+                            setDeleteShow(true);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      ) : null}
+                    </TableItem>
+                  )}
                 </tr>
               ))}
         </Table>

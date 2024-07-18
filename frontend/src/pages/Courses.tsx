@@ -97,7 +97,7 @@ export default function Courses() {
           </div>
         </div>
 
-        <CoursesTable data={data} isLoading={isLoading} />
+        <CoursesTable canEdit={true} data={data} isLoading={isLoading} />
       </div>
 
       {/* Add User Modal */}

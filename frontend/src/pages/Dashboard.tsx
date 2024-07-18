@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 
+import NewCourses from '../components/courses/NewCourses';
 import Layout from '../components/layout';
 import useAuth from '../hooks/useAuth';
 import statsService from '../services/StatsService';
@@ -7,6 +8,7 @@ import statsService from '../services/StatsService';
 export default function Dashboard() {
   const { data, isLoading } = useQuery('stats', statsService.getStats);
   const { authenticatedUser } = useAuth();
+
   return (
     <Layout>
       <div className="header-background pb-5 pt-1">
@@ -36,6 +38,7 @@ export default function Dashboard() {
             </div>
           </div>
         ) : null}
+        <NewCourses></NewCourses>
       </div>
     </Layout>
   );
